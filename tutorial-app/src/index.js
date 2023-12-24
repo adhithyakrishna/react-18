@@ -1,22 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import EventExamples from './EventExamples'
+// This is default import, we can name however we want
+import Book from './Book'
+
+// The is named import
+import { books } from './books'
 
 import './index.css'
-
-const books = [
-  {
-    author: 'Rebecca Yarros',
-    title: 'Fourth Wing',
-    img: './images/fourth-wing.jpg',
-    id: 1,
-  },
-  {
-    author: 'Jordan Moore',
-    title: 'Interesting facts for curious minds',
-    img: './images/curious-minds.jpg',
-    id: 2,
-  },
-]
 
 /*
   Changes made to one component would automatically render it to other components
@@ -28,36 +19,16 @@ const books = [
 const BookList = () => {
   return (
     <section className="booklist">
-      {books.map((book) => {
+      <EventExamples />
+      {books.map((book, index) => {
         // Destructure it and pass it to the book component
         // index is not advisable to be used as a key prop, unless we are sure that the list length is not going to change
         // const { img, title, author, id } = book
 
         // return <Book book={book} key={book.id}></Book>
-        return <Book {...book} key={book.id} />
+        return <Book {...book} index={index} key={book.id} />
       })}
     </section>
-  )
-}
-
-/*
-  We use 
-*/
-/*
-  The props will be only displayed if it is provided
-*/
-const Book = (props) => {
-  // console.log(props)
-  // const { img, title, author, children } = props.book
-  const { img, title, author, children } = props
-  return (
-    <article className="book">
-      <img src={img} alt={title} />
-      {/* you can only pass an expression and the expression returns a value */}
-      <h2>{title}</h2>
-      <h4>{author}</h4>
-      {children}
-    </article>
   )
 }
 
